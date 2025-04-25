@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circle Animation Test</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+    
+    .circle-1 {
+      width: 100px;
+      height: 100px;
+      background: #ff5277;
+      top: 20%;
+      left: 10%;
+    }
+    
+    .circle-2 {
+      width: 150px;
+      height: 150px;
+      background: #4b6cb7;
+      top: 60%;
+      right: 15%;
+    }
+    
+    .circle-3 {
+      width: 80px;
+      height: 80px;
+      background: #7b68ee;
+      top: 30%;
+      right: 10%;
+    }
+    
+    .circle-4 {
+      width: 120px;
+      height: 120px;
+      background: #ffa07a;
+      bottom: 20%;
+      left: 5%;
+    }
+  </style>
+</head>
+<body>
+  <div class="circle circle-1"></div>
+  <div class="circle circle-2"></div>
+  <div class="circle circle-3"></div>
+  <div class="circle circle-4"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script>
+    // Simple animation to make the circles move
+    anime({
+      targets: '.circle',
+      translateX: function() {
+        return anime.random(-100, 100) + 'px';
+      },
+      translateY: function() {
+        return anime.random(-100, 100) + 'px';
+      },
+      scale: [0.8, 1.2],
+      duration: 8000,
+      loop: true,
+      direction: 'alternate',
+      easing: 'easeInOutSine',
+      delay: function(el, i) {
+        return i * 200;
+      }
+    });
+  </script>
+</body>
+</html> 

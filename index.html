@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page Designs - The agent who animates your ideas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gradient-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      --primary-color: #ff5277;
+      --secondary-color: #4b6cb7;
+      --text-color: #333;
+      --light-text: #666;
+      --white: #fff;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--gradient-bg);
+      color: var(--text-color);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+    
+    .logo-icon {
+      background: linear-gradient(45deg, #ff5277, #4b6cb7);
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.5rem;
+      margin-right: 0.75rem;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--text-color);
+    }
+    
+    .btn-primary {
+      background: #000;
+      color: var(--white);
+      border: none;
+    }
+    
+    .hero {
+      padding: 6rem 0;
+      text-align: center;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--light-text);
+      margin-bottom: 3rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    
+    .prompt-box {
+      background: var(--white);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 0 auto 4rem;
+      position: relative;
+      border: 1px solid rgba(75, 108, 183, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .prompt-box:hover {
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+    
+    .prompt-input {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      border: none;
+      background: transparent;
+      outline: none;
+      color: var(--text-color);
+    }
+    
+    .prompt-input::placeholder {
+      color: #aaa;
+    }
+    
+    .prompt-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+    
+    .prompt-buttons {
+      display: flex;
+      gap: 0.75rem;
+    }
+    
+    .prompt-btn {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      border: none;
+      background: #f5f5f5;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .prompt-btn:hover {
+      background: #eaeaea;
+    }
+    
+    .feature-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 5rem;
+    }
+    
+    .feature-btn {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1.5rem;
+      background: var(--white);
+      border-radius: 2rem;
+      font-size: 0.875rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .feature-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-btn svg {
+      margin-right: 0.5rem;
+    }
+    
+    /* Animation elements */
+    .floating-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+    
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.2;
+      transform-origin: center center;
+    }
+    
+    .shape-1 {
+      width: 100px;
+      height: 100px;
+      background: var(--primary-color);
+      top: 20%;
+      left: 10%;
+    }
+    
+    .shape-2 {
+      width: 150px;
+      height: 150px;
+      background: var(--secondary-color);
+      top: 60%;
+      right: 15%;
+    }
+    
+    .shape-3 {
+      width: 80px;
+      height: 80px;
+      background: #7b68ee;
+      top: 30%;
+      right: 10%;
+    }
+    
+    .shape-4 {
+      width: 120px;
+      height: 120px;
+      background: #ffa07a;
+      bottom: 20%;
+      left: 5%;
+    }
+
+    /* Add more shapes for a richer background */
+    .shape-5 {
+      width: 60px;
+      height: 60px;
+      background: #50c878;
+      top: 15%;
+      right: 25%;
+    }
+    
+    .shape-6 {
+      width: 90px;
+      height: 90px;
+      background: #9370db;
+      bottom: 35%;
+      right: 5%;
+    }
+    
+    .logo-highlight {
+      display: inline-block;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    
+    /* Particle system */
+    .particles-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating shapes for background animation -->
+  <div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+    <div class="shape shape-5"></div>
+    <div class="shape shape-6"></div>
+  </div>
+
+  <!-- Particle system container -->
+  <div class="particles-container"></div>
+
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <div class="logo-icon"></div>
+        Landing Page Designs
+      </div>
+      <div class="nav-buttons">
+        <button class="btn btn-outline">Sign in</button>
+        <button class="btn btn-primary">Sign up</button>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <h1>Build something <span class="gradient-text logo-highlight">amazing</span></h1>
+      <p>Idea to design in seconds, with your personal full stack designer</p>
+      
+      <div class="prompt-box">
+        <input type="text" class="prompt-input" placeholder="Ask Landing Page Designs to create a prototype...">
+        <div class="prompt-actions">
+          <div class="prompt-buttons">
+            <button class="prompt-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"/>
+                <path d="M8 16a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm7-8a7 7 0 1 1-14 0 7 7 0 0 1 14 0z"/>
+              </svg>
+              Attach
+            </button>
+            <button class="prompt-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+              </svg>
+              Import Figma
+            </button>
+          </div>
+          <div class="public-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1z"/>
+            </svg>
+            Public
+          </div>
+        </div>
+      </div>
+      
+      <div class="feature-buttons">
+        <button class="feature-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+          </svg>
+          Note taking app
+        </button>
+        <button class="feature-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855-.143.268-.276.56-.395.872.705.157 1.472.257 2.282.287V1.077zM4.249 3.539c.142-.384.304-.744.481-1.078a6.7 6.7 0 0 1 .597-.933A7.01 7.01 0 0 0 3.051 3.05c.362.184.763.349 1.198.49zM3.509 7.5c.036-1.07.188-2.087.436-3.008a9.124 9.124 0 0 1-1.565-.667A6.964 6.964 0 0 0 1.018 7.5h2.49zm1.4-2.741a12.344 12.344 0 0 0-.4 2.741H7.5V5.091c-.91-.03-1.783-.145-2.591-.332zM8.5 5.09V7.5h2.99a12.342 12.342 0 0 0-.399-2.741c-.808.187-1.681.301-2.591.332zM4.51 8.5c.035.987.176 1.914.399 2.741A13.612 13.612 0 0 1 7.5 10.91V8.5H4.51zm3.99 0v2.409c.91.03 1.783.145 2.591.332.223-.827.364-1.754.4-2.741H8.5zm-3.282 3.696c.12.312.252.604.395.872.552 1.035 1.218 1.65 1.887 1.855V11.91c-.81.03-1.577.13-2.282.287zm.11 2.276a6.696 6.696 0 0 1-.598-.933 8.853 8.853 0 0 1-.481-1.079 8.38 8.38 0 0 0-1.198.49 7.01 7.01 0 0 0 2.276 1.522zm-1.383-2.964A13.36 13.36 0 0 1 3.508 8.5h-2.49a6.963 6.963 0 0 0 1.362 3.675c.47-.258.995-.482 1.565-.667zm6.728 2.964a7.009 7.009 0 0 0 2.275-1.521 8.376 8.376 0 0 0-1.197-.49 8.853 8.853 0 0 1-.481 1.078 6.688 6.688 0 0 1-.597.933zM8.5 11.909v3.014c.67-.204 1.335-.82 1.887-1.855.143-.268.276-.56.395-.872A12.63 12.63 0 0 0 8.5 11.91zm3.555-.401c.57.185 1.095.409 1.565.667A6.963 6.963 0 0 0 14.982 8.5h-2.49a13.36 13.36 0 0 1-.437 3.008zM14.982 7.5a6.963 6.963 0 0 0-1.362-3.675c-.47.258-.995.482-1.565.667.248.92.4 1.938.437 3.008h2.49zM11.27 2.461c.177.334.339.694.482 1.078a8.368 8.368 0 0 0 1.196-.49 7.01 7.01 0 0 0-2.275-1.52c.218.283.418.597.597.932zm-.488 1.343a7.765 7.765 0 0 0-.395-.872C9.835 1.897 9.17 1.282 8.5 1.077V4.09c.81-.03 1.577-.13 2.282-.287z"/>
+          </svg>
+          Slidev presentation
+        </button>
+        <button class="feature-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+            <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+          </svg>
+          Task manager
+        </button>
+        <button class="feature-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"/>
+          </svg>
+          Bill splitter
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script>
+    // Simple animation to make the shapes move
+    anime({
+      targets: '.shape',
+      translateX: function() {
+        return anime.random(-100, 100) + 'px';
+      },
+      translateY: function() {
+        return anime.random(-100, 100) + 'px';
+      },
+      scale: [0.8, 1.2],
+      duration: 8000,
+      loop: true,
+      direction: 'alternate',
+      easing: 'easeInOutSine',
+      delay: function(el, i) {
+        return i * 200;
+      }
+    });
+
+    // Animate the logo highlighting
+    anime({
+      targets: '.logo-highlight',
+      scale: [0.9, 1.1, 1],
+      opacity: [0, 1],
+      translateY: [20, 0],
+      duration: 1200,
+      easing: 'spring(1, 80, 10, 0)'
+    });
+
+    // Animate the prompt box
+    anime({
+      targets: '.prompt-box',
+      translateY: [50, 0],
+      opacity: [0, 1],
+      duration: 800,
+      easing: 'easeOutExpo',
+      delay: 400
+    });
+
+    // Staggered animation for the feature buttons
+    anime({
+      targets: '.feature-btn',
+      translateY: [40, 0],
+      opacity: [0, 1],
+      delay: anime.stagger(100, {start: 800}),
+      duration: 600,
+      easing: 'easeOutCubic'
+    });
+
+    // Pulse animation for logo icon
+    anime({
+      targets: '.logo-icon',
+      scale: [1, 1.1, 1],
+      duration: 2000,
+      easing: 'easeInOutSine',
+      loop: true
+    });
+
+    // Enhanced input focus effect
+    document.querySelector('.prompt-input').addEventListener('focus', function() {
+      anime({
+        targets: '.prompt-box',
+        boxShadow: ['0 10px 30px rgba(0, 0, 0, 0.1)', '0 15px 40px rgba(75, 108, 183, 0.2)'],
+        borderColor: ['rgba(75, 108, 183, 0.1)', 'rgba(75, 108, 183, 0.5)'],
+        duration: 800,
+        easing: 'easeOutElastic(1, .5)'
+      });
+    });
+
+    document.querySelector('.prompt-input').addEventListener('blur', function() {
+      anime({
+        targets: '.prompt-box',
+        boxShadow: ['0 15px 40px rgba(75, 108, 183, 0.2)', '0 10px 30px rgba(0, 0, 0, 0.1)'],
+        borderColor: ['rgba(75, 108, 183, 0.5)', 'rgba(75, 108, 183, 0.1)'],
+        duration: 600,
+        easing: 'easeOutQuad'
+      });
+    });
+
+    // Create particle system
+    const particlesContainer = document.querySelector('.particles-container');
+    const particleCount = 20;
+    
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      // Random initial position
+      particle.style.left = anime.random(0, 100) + '%';
+      particle.style.top = anime.random(0, 100) + '%';
+      
+      particlesContainer.appendChild(particle);
+    }
+    
+    // Animate particles
+    anime({
+      targets: '.particle',
+      translateX: function() { 
+        return anime.random(-200, 200) + 'px'; 
+      },
+      translateY: function() { 
+        return anime.random(-200, 200) + 'px'; 
+      },
+      scale: function() { 
+        return anime.random(0.5, 2); 
+      },
+      opacity: [0.2, 0.6, 0.2],
+      easing: 'easeInOutQuad',
+      duration: function() { 
+        return anime.random(3000, 8000); 
+      },
+      delay: function() { 
+        return anime.random(0, 1000); 
+      },
+      loop: true,
+      direction: 'alternate'
+    });
+  </script>
+</body>
+</html> 
